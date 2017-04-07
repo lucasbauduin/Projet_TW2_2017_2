@@ -86,3 +86,30 @@ function getLesMessages($author = null, $follower = null, $mentioned = null, $be
   }
   return $lesMessages;
 }
+
+function getLesUtilisateurs($searched = null, $scope = "both", $type = "both") {
+  global $pdo;
+  $sql = "SELECT * FROM utilisateurs";
+  if($searched && $scope) {
+    if($scope == "both") {
+      $sql .= " WHERE nom LIKE '%$searched%' OR pseudo LIKE '%$searched%'";
+    } else {
+      $sql .= " WHERE $scope = '%$searched%'";
+    }
+  }
+  $sql .= " ORDER BY identifiant ASC";
+  $stmt = $pdo->prepare($sql);
+  $stmt->execute();
+  $res = $stmt->fetchAll();
+  $lesUtilisateurs = [];
+  if($type == "") {
+    foreach ($res as $unUtilisateur) {
+      $lesUtilisateurs[] = ["ident" => $unUtilisateur["identifiant"], "name" => $unUtilisateur['nom']];
+    }
+  } else {
+    foreach ($res as $unUtilisateur) {
+      $lesUtilisateurs[] = ["ident" => $unUtilisateur["identifiant"], "name" => $unUtilisateur['nom']];
+    }
+  }
+  return $lesUtilisateurs;
+}

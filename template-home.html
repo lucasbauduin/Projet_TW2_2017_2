@@ -7,11 +7,13 @@
   </head>
   <body>
     <script type="text/javascript">
-    var requete = new XMLHttpRequest();
-    requete.open("GET", "http://localhost:8888/tw2_projet2/services/findMessages.php", true);
-    requete.addEventListener("load", traitePublications);
-    requete.addEventListener("error", traiteErreur);
-    requete.send(null);
+    var requeteM = new XMLHttpRequest();
+
+
+    requeteM.open("GET", "http://localhost:8888/tw2_projet2/services/findMessages.php", true);
+    requeteM.addEventListener("load", traitePublications);
+    requeteM.addEventListener("error", traiteErreur);
+    requeteM.send(null);
 
     function traitePublications(ev) {
       var lesPublications = JSON.parse(this.responseText);
@@ -20,9 +22,12 @@
       for(var i = 0; i < lesPublications.result.list.length; i++) {
         var article = document.createElement("article");
         article.classList.add("publication");
+        article.setAttribute('id', lesPublications.result.list[i].id);
         var nom_profil = document.createElement("span");
         nom_profil.classList.add("nom-profil");
-        nom_profil.textContent = lesPublications.result.list[i].author;
+        nom_profil.textContent = "test";
+        nom_profil.setAttribute('id', lesPublications.result.list[i].author);
+
 
         var info_profil = document.createElement("div");
         info_profil.classList.add("info-profil");
@@ -47,6 +52,27 @@
         article.appendChild(contenu);
         blocListePublications.appendChild(article);
       }
+
+      var requeteU = new XMLHttpRequest();
+
+      requeteU.open("GET", "http://localhost:8888/tw2_projet2/services/findUsers.php", true);
+      requeteU.addEventListener("load", traiteUtilisateurs);
+      requeteU.addEventListener("error", traiteErreur);
+      requeteU.send(null);
+    }
+
+    function traiteUtilisateurs(ev) {
+      var lesUtilisateurs = JSON.parse(this.responseText);
+      var listeBlocsNoms = document.getElementsByClassName('nom-profil');
+
+      for(i=0; i<lesUtilisateurs.result.list.length; i++) {
+        for(j=0; j<listeBlocsNoms.length; j++) {
+          if(lesUtilisateurs.result.list[i].ident == listeBlocsNoms[j].getAttribute("id")) {
+            listeBlocsNoms[j].textContent = lesUtilisateurs.result.list[i].name;
+          }
+        }
+      }
+
     }
 
     function traiteErreur(ev) {
