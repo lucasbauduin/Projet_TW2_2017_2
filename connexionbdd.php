@@ -18,9 +18,9 @@ function getMessage($identifiant) {
   $stmt->execute();
   $res = $stmt->fetch();
   if($res == false) {
-    return NULL;
+    return null;
   } else {
-    return new Message($identifiant, $res['contenu'], $res['auteur'], $res['date']);
+    return ["id" => $identifiant, "author" => $res['auteur'], "content" => $res['contenu'], "datetime" => $res['date']];
   }
 }
 
@@ -32,7 +32,7 @@ function getUser($identifiant, $type = "short") {
   $stmt->execute();
   $res = $stmt->fetch();
   if($res == false) {
-    return NULL;
+    return null;
   } else {
     $user = ["ident" => $identifiant, "name" => $res['nom']];
     if($type == "long") {
@@ -40,4 +40,49 @@ function getUser($identifiant, $type = "short") {
     }
     return $user;
   }
+}
+
+function getLesMessages($author = null, $follower = null, $mentioned = null, $before= null, $count = 15) {
+  global $pdo;
+  $sql = "SELECT * FROM publications";
+  if($author != null || $follower != null || $mentioned != null || $before != null) {
+    $sql .= " WHERE";
+    $dejaclause = false;
+    if($author != null) {
+      $dejaclause = true;
+      $sql .= " auteur = $author";
+    }
+    if($follower != null) {
+      if($dejaclause) {
+        $sql .= " AND";
+      }
+      $sql .= " auteur IN (SELECT aqui FROM estabonnea WHERE qui = $follower)";
+    }
+    if($mentioned != null) {
+      if($dejaclause) {
+        $sql .= " AND";
+      }
+      $sql .= " identifiant IN (SELECT idpublication FROM citations WHERE idutilisateur = $mentioned)";
+    }
+    if($before != null) {
+      if($dejaclause) {
+        $sql .= " AND";
+      }
+      $sql .= " identifiant < $before";
+    }
+  }
+  $sql .= " ORDER BY identifiant DESC LIMIT ".$count;
+  $stmt = $pdo->prepare($sql);
+  $stmt->execute();
+  $res = $stmt->fetchAll();
+  $lesMessages = [];
+  foreach ($res as $unMessage) {
+    $lesMessages[] = [
+      "id" => $unMessage['identifiant'],
+      "author" => $unMessage['auteur'],
+      "content" => $unMessage['contenu'],
+      "datetime" => $unMessage['date']
+    ];
+  }
+  return $lesMessages;
 }
