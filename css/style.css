@@ -1,0 +1,111 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  color: #14171a;
+  background: #f5f8fa;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+header {
+  width: 100%;
+  padding: 12px 0;
+  box-sizing: border-box;
+  background: #ffffff;
+  border-bottom: 1px solid #d0d3d5;
+  box-shadow: 0 1px #e9ecee;
+  margin: 0 0 12px;
+}
+
+.fix {
+  clear: both;
+}
+
+
+.enveloppe {
+  width: 990px;
+  margin: 0 auto;
+}
+
+.menu {
+  width: 22%;
+  min-height: 120px;
+  background: #ffffff;
+  border: 1px solid #e5ecf0;
+  box-sizing: border-box;
+  padding: 12px;
+  display: block;
+  border-radius: 3px;
+}
+
+.gauche {
+  float: left;
+}
+
+.droite {
+  float: right;
+}
+
+.principal {
+  width: 54%;
+  min-height: 120px;
+  margin: 0 1% 0 1%;
+}
+
+article.publication {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px;
+  background: #ffffff;
+  border: 1px solid #e5ecf0;
+  display:inline-block;
+  margin: 0 0 6px;
+  border-radius: 3px;
+  clear: both;
+}
+
+article .chargerplus {
+  color: #627787;
+  font-size: 14px;
+  text-align: center;
+}
+
+article.publication .contenu {
+  margin-left: 58px;
+}
+
+article div.img-profil-min {
+  width: 48px;
+  height: 48px;
+  border-radius: 5px;
+  float: left;
+  display: block;
+  clear: both;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+article .info-profil {
+  font-size: 1.05em;
+  display: block;
+  font-size: 14px;
+line-height: 20px;
+  color: #657786;
+}
+
+article .info-profil .nom-profil {
+  font-weight: bold;
+  color: #14171a;
+  line-height: 16px;
+}
+
+article .contenu {
+  line-height: 18px;
+}
+
+article .contenu p {
+  font-size: 14px;
+}

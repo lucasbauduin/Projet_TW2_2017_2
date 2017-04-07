@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link href="https://fonts.googleapis.com/css?family=Yantramanav:300,400" rel="stylesheet">
+  </head>
+  <body>
+    <script type="text/javascript">
+    var requete = new XMLHttpRequest();
+    requete.open("GET", "http://localhost:8888/tw2_projet2/services/findMessages.php", true);
+    requete.addEventListener("load", traitePublications);
+    requete.addEventListener("error", traiteErreur);
+    requete.send(null);
+
+    function traitePublications(ev) {
+      var lesPublications = JSON.parse(this.responseText);
+      var blocListePublications = document.querySelector("div#listePublications");
+
+      for(var i = 0; i < lesPublications.result.list.length; i++) {
+        var article = document.createElement("article");
+        article.classList.add("publication");
+        var nom_profil = document.createElement("span");
+        nom_profil.classList.add("nom-profil");
+        nom_profil.textContent = lesPublications.result.list[i].author;
+
+        var info_profil = document.createElement("div");
+        info_profil.classList.add("info-profil");
+        var info_profil_2 = document.createElement("div");
+        info_profil_2.classList.add("info-profil");
+        info_profil_2.classList.add("date");
+        info_profil_2.textContent = lesPublications.result.list[i].datetime;
+
+        var img_profil_min = document.createElement("div");
+        img_profil_min.classList.add("img-profil-min");
+        img_profil_min.style.backgroundImage = "url('images/"+lesPublications.result.list[i].author+".jpg')";
+        var contenu = document.createElement("div");
+        contenu.classList.add("contenu");
+        var p = document.createElement("p");
+        p.textContent = lesPublications.result.list[i].content;
+
+        article.appendChild(img_profil_min);
+        info_profil.appendChild(nom_profil);
+        contenu.appendChild(info_profil);
+        contenu.appendChild(info_profil_2);
+        contenu.appendChild(p);
+        article.appendChild(contenu);
+        blocListePublications.appendChild(article);
+      }
+    }
+
+    function traiteErreur(ev) {
+      alert("erreur");
+    }
+    </script>
+    <header>
+      <div class="enveloppe">{header}</div>
+    </header>
+    <div class="enveloppe">
+      <section class="menu gauche"> </section>
+      <section class="principal gauche">
+        <div id="listePublications"></div>
+        <article class="publication"><div class="chargerplus">Il n'a pas d'autre contenu</div></article>
+      </section>
+      <footer class="menu droite"> </footer>
+      <div class="fix"></div>
+    <div>
+    <script src="js/scripts.js"></script>
+  </body>
+</html>
