@@ -4,8 +4,8 @@ require_once '../fonctions.php';
 $pdo = getPdo();
 
 $searched = inputFilterString('searched', false) ? (String) inputFilterString('searched', false) : null;
-$scope = inputFilterString('scope', false) ? (String) inputFilterString('scope', false) : null;
-$type = inputFilterString('type', false) ? (String) inputFilterString('type', false) : null;
+$scope = inputFilterString('scope', false) ? (String) inputFilterString('scope', false) : "both";
+$type = inputFilterString('type', false) ? (String) inputFilterString('type', false) : "short";
 
 $lesUtilisateurs = getLesUtilisateurs($searched, $scope, $type);
 

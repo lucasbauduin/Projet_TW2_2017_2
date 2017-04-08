@@ -34,7 +34,7 @@ function getUser($identifiant, $type = "short") {
   if($res == false) {
     return null;
   } else {
-    $user = ["ident" => $identifiant, "name" => $res['nom']];
+    $user = ["ident" => $res['pseudo'], "name" => $res['nom']];
     if($type == "long") {
       $user = array_merge($user, ["description" => $res['presentation']]);
     }
@@ -42,36 +42,36 @@ function getUser($identifiant, $type = "short") {
   }
 }
 
-function getLesMessages($author = null, $follower = null, $mentioned = null, $before= null, $count = 15) {
+function getLesMessages($author = "null", $follower = "null", $mentioned = "null", $before= "null", $count = 15) {
   global $pdo;
-  $sql = "SELECT * FROM publications";
-  if($author != null || $follower != null || $mentioned != null || $before != null) {
+  $sql = "SELECT publications.identifiant, contenu, auteur, date, pseudo FROM publications INNER JOIN utilisateurs ON publications.auteur = utilisateurs.identifiant";
+  if($author != "null" || $follower != "null" || $mentioned != "null" || $before != "null") {
     $sql .= " WHERE";
     $dejaclause = false;
-    if($author != null) {
+    if($author != "null") {
       $dejaclause = true;
-      $sql .= " auteur = $author";
+      $sql .= " pseudo = $author";
     }
-    if($follower != null) {
+    if($follower != "null") {
       if($dejaclause) {
         $sql .= " AND";
       }
-      $sql .= " auteur IN (SELECT aqui FROM estabonnea WHERE qui = $follower)";
+      $sql .= " pseudo IN (SELECT aqui FROM estabonnea WHERE qui = $follower)";
     }
-    if($mentioned != null) {
+    if($mentioned != "null") {
       if($dejaclause) {
         $sql .= " AND";
       }
       $sql .= " identifiant IN (SELECT idpublication FROM citations WHERE idutilisateur = $mentioned)";
     }
-    if($before != null) {
+    if($before != "null") {
       if($dejaclause) {
         $sql .= " AND";
       }
-      $sql .= " identifiant < $before";
+      $sql .= " publications.identifiant < $before";
     }
   }
-  $sql .= " ORDER BY identifiant DESC LIMIT ".$count;
+  $sql .= " ORDER BY publications.identifiant DESC LIMIT ".$count;
   $stmt = $pdo->prepare($sql);
   $stmt->execute();
   $res = $stmt->fetchAll();
@@ -79,15 +79,16 @@ function getLesMessages($author = null, $follower = null, $mentioned = null, $be
   foreach ($res as $unMessage) {
     $lesMessages[] = [
       "id" => $unMessage['identifiant'],
-      "author" => $unMessage['auteur'],
+      "author" => $unMessage['pseudo'],
       "content" => $unMessage['contenu'],
       "datetime" => $unMessage['date']
     ];
   }
+
   return $lesMessages;
 }
 
-function getLesUtilisateurs($searched = null, $scope = "both", $type = "both") {
+function getLesUtilisateurs($searched = null, $scope = "both", $type = "short") {
   global $pdo;
   $sql = "SELECT * FROM utilisateurs";
   if($searched && $scope) {
@@ -102,13 +103,13 @@ function getLesUtilisateurs($searched = null, $scope = "both", $type = "both") {
   $stmt->execute();
   $res = $stmt->fetchAll();
   $lesUtilisateurs = [];
-  if($type == "") {
+  if($type == "short") {
     foreach ($res as $unUtilisateur) {
-      $lesUtilisateurs[] = ["ident" => $unUtilisateur["identifiant"], "name" => $unUtilisateur['nom']];
+      $lesUtilisateurs[] = ["ident" => $unUtilisateur["pseudo"], "name" => $unUtilisateur['nom']];
     }
   } else {
     foreach ($res as $unUtilisateur) {
-      $lesUtilisateurs[] = ["ident" => $unUtilisateur["identifiant"], "name" => $unUtilisateur['nom']];
+      $lesUtilisateurs[] = ["ident" => $unUtilisateur["pseudo"], "name" => $unUtilisateur['nom'], "description" => $unUtilisateur['presentation']];
     }
   }
   return $lesUtilisateurs;

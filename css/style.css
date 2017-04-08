@@ -9,14 +9,47 @@ body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
+a {
+  color: #ef71a1;
+}
+
 header {
   width: 100%;
-  padding: 12px 0;
+  padding: 4px 0;
   box-sizing: border-box;
   background: #ffffff;
   border-bottom: 1px solid #d0d3d5;
   box-shadow: 0 1px #e9ecee;
   margin: 0 0 12px;
+}
+
+.bouton {
+text-align: center;
+}
+
+form input[type="submit"] {
+  padding: 6px 20px;
+  margin: 12px 0 0;
+  background: #ef71a1;
+  color: #ffffff;
+  border-radius: 3px;
+  border: none;
+  font-size: 14px;
+}
+
+.separation {
+  width: 75%;
+  margin: 12px auto 0;
+  border-bottom: 1px solid #e5ecf0;
+}
+
+header .logo {
+  width: 42px;
+  height: 42px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url('../images/logo.png');
+  margin: 4px auto;
 }
 
 .fix {
@@ -31,7 +64,6 @@ header {
 
 .menu {
   width: 22%;
-  min-height: 120px;
   background: #ffffff;
   border: 1px solid #e5ecf0;
   box-sizing: border-box;
@@ -42,6 +74,32 @@ header {
 
 .gauche {
   float: left;
+}
+
+.gauche h1 {
+  font-size: 1em;
+  font-weight: normal;
+  padding: 0 0 12px;
+  margin: 0 0 12px;
+  border-bottom: 1px solid #e5ecf0;
+  text-align: center;
+}
+
+.menu .label {
+  font-size: 13px;
+  color: #657786;
+  font-weight: normal;
+  padding: 0 0 12px;
+  text-align: center;
+}
+
+.gauche input[type="text"], .gauche input[type="password"], gauche textarea {
+  margin: 0 0 6px;
+}
+
+.gauche textarea.description {
+  min-height: 120px;
+  max-height: 260px;
 }
 
 .droite {
@@ -66,17 +124,23 @@ article.publication {
   clear: both;
 }
 
-article .chargerplus {
+article.publication.more {
+  background: linear-gradient(#ffffff, #eff3f5);
+}
+
+.chargerplus {
   color: #627787;
+  text-shadow: 0 1px #fff;
   font-size: 14px;
   text-align: center;
+  box-sizing: border-box;
 }
 
 article.publication .contenu {
   margin-left: 58px;
 }
 
-article div.img-profil-min {
+div.img-profil-min {
   width: 48px;
   height: 48px;
   border-radius: 5px;
@@ -88,11 +152,40 @@ article div.img-profil-min {
   background-position: center center;
 }
 
+.menu .img-profil-min {
+  width: 32px;
+  height: 32px;
+}
+
+.menu ul#listeUtilisateurs li {
+  vertical-align: middle;
+  display: block;
+  clear: both;
+  line-height: 32px;
+  font-size: 14px;
+  padding: 6px 0;
+  box-sizing: border-box;
+  border-bottom: 1px solid #fcfcfc;
+}
+
+.menu ul#listeUtilisateurs li:last-child {
+  border: none;
+}
+
+.menu ul#listeUtilisateurs li div.nom {
+  margin: 0 0 0 6px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 135px;
+  float: left;
+}
+
 article .info-profil {
   font-size: 1.05em;
   display: block;
   font-size: 14px;
-line-height: 20px;
+  line-height: 20px;
   color: #657786;
 }
 
@@ -108,4 +201,58 @@ article .contenu {
 
 article .contenu p {
   font-size: 14px;
+}
+
+.menu .rechercheUtilisateurs {
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0 0 6px;
+}
+
+.menu input[type="text"], .menu input[type="password"], .menu textarea {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  padding: 6px;
+  border: 1px solid #e5ecf0;
+  border-radius: 3px;
+}
+
+
+.menu {
+  margin-bottom: 12px;
+}
+
+p.copyright {
+    font-size: 12.2px;
+    color: #657786;
+    text-align: center;
+    line-height: 18px;
+}
+
+.pseudo {
+  font-size: 13px;
+  color: #657786;
+  font-weight: normal;
+  margin: 0 0 0 6px;
+}
+
+
+
+
+@media screen and (max-width: 1024px) {
+  .enveloppe {
+      width: 100%;
+  }
+
+  .principal, .menu {
+    width: 96%;
+    margin: 0 2%;
+  }
+
+  .menu ul#listeUtilisateurs li div.nom {
+    width: 60%;
+  }
+
+
 }
