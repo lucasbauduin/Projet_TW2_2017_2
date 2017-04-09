@@ -3,21 +3,28 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width">
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/style.php?contraste=704d78" />
     <link href="https://fonts.googleapis.com/css?family=Yantramanav:300,400" rel="stylesheet">
   </head>
   <body onload="chargeAccueil()">
+    <section id="infoUtilisateur">
+      <div class="enveloppe">
+        <div id="img-profil" style="background-image: url(http://192.168.0.251:8888/tw2_projet2/images/bauduin.jpg);"></div>
+        <h1>Lucas Bauduin <span id="pseudo">@bauduin</span></h1>
+        <div id="presentation-profil"><p>Étudiant en Licence Informatique à Lille 1, spécialisé en Développement.</p></div>
+      </di>
+    </section>
     <header>
       <div class="enveloppe"><div class="logo"></div></div>
     </header>
     <div class="enveloppe">
       <section class="menu gauche">
         <h1>Bienvenue sur Rézozio !</h1>
-        <div class="label">Je possède un compte</div>
+        <div class="label">J'ai déjà un compte</div>
         <form action="" method="">
           <input id="loginconnexion" type="text" name="login" placeholder="Identifiant" />
           <input type="password" name="password" placeholder="Mot de passe" />
-          <div class="bouton"><input type="submit" value="Connexion" /></div>
+          <div class="bouton" style="margin: 0 0 17px;"><input type="submit" value="Connexion" /></div>
           <div class="fix"></div>
         </form>
         <div class="separation"></div>
@@ -36,19 +43,31 @@
         </form>
       </section>
       <section id="contenuprincipal" class="principal gauche">
+        <article class="publication publiform" >
+          <div class="img-profil-min" style="background-image: url(http://192.168.0.251:8888/tw2_projet2/images/bauduin.jpg);"></div>
+          <div class="contenu">
+            <form action="" method="">
+              <input type="text" name="login" placeholder="À quoi pensez-vous ?" />
+              <div class="bouton" style="text-align: right;"><input type="submit" style="width: 30%; margin: 6px 0 0;" value="Publier" /></div>
+            </form>
+          </div>
+        </article>
         <div id="listePublications"></div>
         <div id="parentvoirplus"><div id="chargerplus"></div></div>
       </section>
-      <footer class="menu droite">
+      <div class="menu droite">
         <div class="rechercheUtilisateurs"><input id="searched" type="text" name="searched" placeholder="Recherche de membre" /></div>
         <ul id="listeUtilisateurs"></ul>
-      </footer>
-      <footer class="menu droite">
+      </div>
+      <div class="menu droite">
         <p class="copyright" style="padding: 0px 0 6px; margin-bottom: 6px; border-bottom: 1px solid #efefef;">Crédits</p>
-        <p class="copyright" style="">Ceci est une application développée par <a href="mailto:lucas.bauduin@etudiant.univ-lille1.fr">BAUDUIN Lucas</a> et <a href="mailto:julien.dorne@etudiant.univ-lille1.fr">DORNE Julien</a> dans de cadre d'un projet de Technologie du WEB</p><br />
+        <p class="copyright" style="">Ceci est une application développée par <a href="mailto:lucas.bauduin@etudiant.univ-lille1.fr">BAUDUIN Lucas</a> et <a href="mailto:julien.dorne@etudiant.univ-lille1.fr">DORNE Julien</a> dans de cadre d'un projet de Technologie du WEB.</p><br />
         <p class="copyright">Les consignes du projet, c'est  : <a href="http://www.fil.univ-lille1.fr/~bogaert/tw2/projet2017-2/projet2017-2.html">ici</a>
-      </footer>
+      </div>
       <div class="fix"></div>
+      <footer>
+        <p>© 2017 Rézozio</p>
+      </footer>
     <div>
     <script type="text/javascript" src="js/scripts.js"></script>
 

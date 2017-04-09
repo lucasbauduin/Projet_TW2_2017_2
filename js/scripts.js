@@ -7,7 +7,7 @@ searched.addEventListener('keyup',function(){
 });
 
 function chargeAccueil() {
-  getMessages(null, null, null, null, 4);
+  getMessages(null, null, null, null, null);
   findUtilisateurs("");
 }
 
@@ -99,7 +99,7 @@ function traitePublications(ev) {
     article.setAttribute('id', "voirplus");
     var chargerplus = document.createElement("div");
     var lien = document.createElement("a");
-    lien.setAttribute('href', "javascript:getMessages(null, null, null, "+(lesPublications.result.list[i-1].id)+", 4)");
+    lien.setAttribute('href', "javascript:getMessages(null, null, null, "+(lesPublications.result.list[i-1].id)+", null)");
     chargerplus.classList.add("chargerplus");
     lien.textContent = "Je veux en voir plus !";
     chargerplus.appendChild(lien);

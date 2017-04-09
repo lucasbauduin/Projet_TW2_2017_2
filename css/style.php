@@ -1,3 +1,15 @@
+<?php
+header("Content-type: text/css; charset=iso-8859-1");
+$ct = isset($_GET['contraste']) ? (string) $_GET['contraste'] : null;
+
+if($ct != null) {
+	$couleurcontraste = '#'.$ct;
+} else {
+	$couleurcontraste = '#027bfc'; // #ef62a8 0e86fe
+}
+?>
+
+
 * {
   margin: 0;
   padding: 0;
@@ -10,7 +22,7 @@ body {
 }
 
 a {
-  color: #ef71a1;
+  color: <?php echo $couleurcontraste; ?>;
 }
 
 header {
@@ -30,15 +42,16 @@ text-align: center;
 form input[type="submit"] {
   padding: 6px 20px;
   margin: 12px 0 0;
-  background: #ef71a1;
+  background: <?php echo $couleurcontraste; ?>;
+  border: none;
   color: #ffffff;
   border-radius: 3px;
-  border: none;
   font-size: 14px;
+  -webkit-appearance: none;
 }
 
 .separation {
-  width: 75%;
+  width: 35%;
   margin: 12px auto 0;
   border-bottom: 1px solid #e5ecf0;
 }
@@ -46,10 +59,57 @@ form input[type="submit"] {
 header .logo {
   width: 42px;
   height: 42px;
+  background-color: <?php echo $couleurcontraste; ?>;
   background-repeat: no-repeat;
   background-size: cover;
   background-image: url('../images/logo.png');
   margin: 4px auto;
+}
+
+section#infoUtilisateur {
+	width: 100%;
+	min-height: 220px;
+	border-top: 6px solid #ffffff;
+	background-color: <?php echo $couleurcontraste; ?>;
+	background-image: url('../images/fond.png');
+	background-size: cover;
+	padding: 0 0 24px;
+  box-sizing: border-box;
+}
+
+section#infoUtilisateur #img-profil {
+	width: 128px;
+	height: 128px;
+	margin: 24px auto 0;
+	background-size: cover;
+	border-radius: 50%;
+	background-position: center center;
+	background-repeat: no-repeat;
+	border: 4px solid #ffffff;
+}
+
+section#infoUtilisateur #presentation-profil {
+	background: #ffffff;
+	border-radius: 4px;
+	width: 50%;
+	margin: 12px auto 0;
+	padding: 24px;
+	display: block;
+  box-sizing: border-box;
+}
+
+section#infoUtilisateur #presentation-profil p {
+	color: #657786;
+	font-size: 14px;
+	line-height: 22px;
+	font-style: italic;
+}
+
+section#infoUtilisateur h1 {
+		text-align: center;
+		padding: 24px 0 12px;
+		font-weight: normal;
+		color: rgba(255,255,255, .75);
 }
 
 .fix {
@@ -79,7 +139,7 @@ header .logo {
 .gauche h1 {
   font-size: 1em;
   font-weight: normal;
-  padding: 0 0 12px;
+  padding: 12px 0 24px;
   margin: 0 0 12px;
   border-bottom: 1px solid #e5ecf0;
   text-align: center;
@@ -126,6 +186,12 @@ article.publication {
 
 article.publication.more {
   background: linear-gradient(#ffffff, #eff3f5);
+  margin: 0;
+}
+
+article.publication.more a {
+  color: #627787;
+  text-decoration: none;
 }
 
 .chargerplus {
@@ -152,9 +218,40 @@ div.img-profil-min {
   background-position: center center;
 }
 
-.menu .img-profil-min {
+.menu .img-profil-min, article.publiform .img-profil-min {
   width: 32px;
   height: 32px;
+}
+
+article.publiform {
+  border: 1px solid #dcdcdc;
+  box-shadow: 0 0 2px 2px #e9ecee;
+
+
+}
+article.publiform .contenu {
+  margin-left: 44px;
+}
+
+article.publiform input[type="text"] {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  padding: 8px 6px;
+  border: 1px solid #EDEDED;
+  font-size: 13px;
+  -webkit-appearance: none;
+  -webkit-border-radius: 0;
+
+  border-radius: 3px;
+}
+
+.menu ul#listeUtilisateurs {
+	max-height: 210px;
+	overflow-y: scroll;
+	padding-left: 9Px;
+	box-shadow: 0 0 2px #e9ecee inset;
+  border: 1px solid #e5ecf0;
 }
 
 .menu ul#listeUtilisateurs li {
@@ -216,6 +313,9 @@ article .contenu p {
   padding: 6px;
   border: 1px solid #e5ecf0;
   border-radius: 3px;
+  -webkit-appearance: none;
+  -webkit-border-radius: 0;
+  border-radius: 3px;
 }
 
 
@@ -226,7 +326,7 @@ article .contenu p {
 p.copyright {
     font-size: 12.2px;
     color: #657786;
-    text-align: center;
+    text-align: left;
     line-height: 18px;
 }
 
@@ -237,6 +337,14 @@ p.copyright {
   margin: 0 0 0 6px;
 }
 
+footer {
+  width: 100%;
+  text-align: center;
+  font-size: 14px;
+  color: #657786;
+  padding: 24px 0;
+  text-shadow: 0 1px #fff;
+}
 
 
 
@@ -246,13 +354,20 @@ p.copyright {
   }
 
   .principal, .menu {
-    width: 96%;
-    margin: 0 2%;
+    width: 92%;
+    margin: 0 4% 12px;
   }
 
   .menu ul#listeUtilisateurs li div.nom {
     width: 60%;
   }
 
+  .menu input[type="text"], .menu input[type="password"] {
+		padding: 12px 6px;
+	}
+
+	section#infoUtilisateur #presentation-profil {
+		width: 80%;
+	}
 
 }

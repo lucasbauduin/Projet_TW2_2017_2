@@ -50,7 +50,7 @@ function getLesMessages($author = "null", $follower = "null", $mentioned = "null
     $dejaclause = false;
     if($author != "null") {
       $dejaclause = true;
-      $sql .= " pseudo = $author";
+      $sql .= " pseudo = '$author'";
     }
     if($follower != "null") {
       if($dejaclause) {
@@ -98,7 +98,7 @@ function getLesUtilisateurs($searched = null, $scope = "both", $type = "short") 
       $sql .= " WHERE $scope = '%$searched%'";
     }
   }
-  $sql .= " ORDER BY identifiant ASC";
+  $sql .= " ORDER BY nom ASC";
   $stmt = $pdo->prepare($sql);
   $stmt->execute();
   $res = $stmt->fetchAll();
